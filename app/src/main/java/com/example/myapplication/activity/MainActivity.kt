@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
 import com.example.myapplication.dao.ItensDAO
 import com.example.myapplication.model.Item
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val itensDAO = ItensDAO()
@@ -22,7 +23,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val edtLinkImagem = findViewById<EditText>(R.id.edt_link_imagem)
 
         val btnCadastrar = findViewById<Button>(R.id.btn_cadastrar)
-        val btnVerItens = findViewById<TextView>(R.id.txv_ver_itens)
+        val txvVerItens = findViewById<TextView>(R.id.txv_ver_itens)
+
+        val fabVoltarHome = findViewById<FloatingActionButton>(R.id.fab_login)
 
         btnCadastrar.setOnClickListener {
             val nome = edtNome.text.toString()
@@ -52,9 +55,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
         }
 
-        btnVerItens.setOnClickListener {
+        txvVerItens.setOnClickListener {
             val intent = Intent(this, ListaItens::class.java)
             startActivity(intent)
+        }
+
+        fabVoltarHome.setOnClickListener {
+            finish()
         }
     }
 }
