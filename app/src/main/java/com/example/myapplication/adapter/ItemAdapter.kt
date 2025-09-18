@@ -1,5 +1,6 @@
 package com.example.myapplication.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -28,7 +29,12 @@ class ItemAdapter(
 
         holder.txvNome.text = item.nome
         holder.txvValor.text = item.valor
-        
+
+        holder.btnExcluir.setOnClickListener {
+            itens.remove(item)
+            notifyItemRemoved(position)
+        }
+
         Glide
             .with(holder.itemView.context)
             .load(item.linkImagem)

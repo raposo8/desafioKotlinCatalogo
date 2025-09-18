@@ -29,14 +29,27 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             val valor = edtValor.text.toString()
             val linkImagem = edtLinkImagem.text.toString()
 
-            itensDAO.add(
-                Item(nome, valor, linkImagem)
-            )
+            try {
+                valor.toFloat()
 
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Sucesso!")
-            builder.setMessage("Seu item de colecionador foi adicionado com sucesso")
-            builder.create().show()
+                itensDAO.add(
+                    Item(nome, valor, linkImagem)
+                )
+
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Sucesso!")
+                builder.setMessage("Seu item de colecionador foi adicionado com sucesso")
+                builder.create().show()
+
+                edtNome.text.clear()
+                edtValor.text.clear()
+                edtLinkImagem.text.clear()
+            } catch (e: NumberFormatException) {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Erro!")
+                builder.setMessage("Campo valor deve ser um valor númerico")
+                builder.create().show()
+            }
         }
 
         btnVerItens.setOnClickListener {
